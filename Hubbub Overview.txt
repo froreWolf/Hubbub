@@ -1,11 +1,10 @@
-Hubbub Overview
+	Hubbub Overview
 ============================================================================================
 This Document contains the major features that are planned to be included in the application as well as any additional notes on any of the features as they are being developed
 
 Main Features:
 	Area Communication Pages (along with the community spots on a map mode or something)
-	Message Boards (maybe specific ones for different communities)
-	Calendar Support
+	Message Boards (maybe specific ones for different communities)z
 	User Profiles (most Likely using google sign in)
 
 
@@ -13,7 +12,8 @@ Main Features:
 
 Area Communication Pages
 ------------------------
--Main Feature Along With 
+-Main Feature Along With community spots
+-allows people to form communities with which they can communicate and organize ride sharing
 
 Community Spots (connected with area communication pages)
 ---------------------------------------------------------
@@ -45,3 +45,18 @@ Security and Liabilities
 -need to protect user information very securely
 -need to worry about user's safety when meeting up with people you don't actually know
 -perpaps post warnings establishing that people should be careful about who they are meeting with, and to make sure that they are actually who they say they are
+
+User Reporting System / blocking
+--------------------------------
+-must have a system in place to
+
+Terms and Conditions
+--------------------
+-liability for meeting with people who wish to do harm
+-List of rules
+	-must have a valid .edu email address
+	-you cannot have a fake account or have an account claiming a false identity or it will be terminated
+	-you may request at any time your account be deleted from the platform as well as any data stored in the system
+	-all user data stored will be voluntary, and any user data tracking will be kept off by default
+	-harrasing a user or any form of unsolicited contact with a user is punishable by timed bans and a strike on your account
+	-must be atleast 18 years of age to use this application	
