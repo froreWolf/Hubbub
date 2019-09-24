@@ -1,0 +1,47 @@
+Hubbub Overview
+============================================================================================
+This Document contains the major features that are planned to be included in the application as well as any additional notes on any of the features as they are being developed
+
+Main Features:
+	Area Communication Pages (along with the community spots on a map mode or something)
+	Message Boards (maybe specific ones for different communities)
+	Calendar Support
+	User Profiles (most Likely using google sign in)
+
+
+============================================================================================
+
+Area Communication Pages
+------------------------
+-Main Feature Along With 
+
+Community Spots (connected with area communication pages)
+---------------------------------------------------------
+-pre-determined locations allow users to communicate and meet up with fellow commuters in spots that do not compromise sensitive information such as a their actual address if they do not wish to disclose this.
+
+
+Message Boards
+--------------
+-offer community and commuter bonding
+-good place to meet people when you are a commuter
+
+Calendar Support
+----------------
+-I don't think this will be as big of a feature as teh other ones which seem more important to me.
+-would allow users to schedule events and invite other users to these events
+-can already be done through google calendars with our @ashland.edu emails, so this might be redundant
+-might get cut from the app if there is not enough time, or effect that can be spared to develop
+
+Users and User Profiles
+-----------------------
+-Google Sign In
+-some way to verify that the accounts are actually the people they are saying they are ( perhaps limit this to .edu emails initially or something)
+-allows users to get to know the people they are going to be ride sharing with
+-protect user information
+-allow user to display only the information they wish to show
+
+Security and Liabilities
+------------------------
+-need to protect user information very securely
+-need to worry about user's safety when meeting up with people you don't actually know
+-perpaps post warnings establishing that people should be careful about who they are meeting with, and to make sure that they are actually who they say they are

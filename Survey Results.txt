@@ -1,0 +1,27 @@
+Initial Interest Survey
+-----------------------
+
+Q1: Would you be interested in using an application like this?
+
+Yes: 10 : 83.33%
+No: 2 : 16.67%
+
+
+Q2:Please Rank The Following features on how useful you feel they would be.
+
+Overall Ranking
+1: Area Communication Pages
+2: Messaging
+3: Community Meeting Spots
+4: Calendar Support
+5: User Profiles
+
+
+Q3: Additional Features?
+
+General Chat Board
+Weather Chat Board
+
+Q4: Additional Feedback
+
+Likes user profiles. Helps people get familiar with those they would be sharing rides with.
