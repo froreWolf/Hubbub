@@ -1,4 +1,4 @@
-package com.example.hubbub;
+package com.apathyforge.hubbub;
 
 import org.junit.Test;
 
