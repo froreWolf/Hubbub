@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hubbub</string>
-    <string name="button">Button</string>
+    <string name="logout_btn">Log Out</string>
+    <string name="welcome_message">Welcome\ndisplayName</string>
 </resources>
