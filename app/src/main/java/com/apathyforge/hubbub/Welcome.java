@@ -69,15 +69,32 @@ public class Welcome extends AppCompatActivity {
                         startActivity(new Intent(Welcome.this, MainActivity.class));
                     }
                 });
+    }
 
+    public void signOutRevokeAccess(){ //not quite working yet
+        // Firebase sign out
+        mAuth.signOut();
+        // Google sign out
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        startActivity(new Intent(Welcome.this, MainActivity.class));
+                    }
+                });
     }
 
     public void getUserDetails(){
         TextView welcomeMessage = findViewById(R.id.welcome_message);
         FirebaseUser user = mAuth.getCurrentUser();
-
         welcomeMessage.setText(getWelcomeMessage() + "\n" + user.getDisplayName() + "!");
-    }
+        //log the user out and revoke access for their account if the user
+        //logs in with an email address that is not a .edu address
+/*      String userEmail = user.getEmail();
+        if(!userEmail.contains(".edu")){
+            signOutRevokeAccess();
+        }
+*/  }
 
     public String getWelcomeMessage(){
         Random rand = new Random();
