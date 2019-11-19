@@ -10,85 +10,71 @@
         android:id="@+id/logout_btn"
         android:layout_width="211dp"
         android:layout_height="59dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="575dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         android:text="@string/logout_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.785" />
 
     <Button
         android:id="@+id/profile_btn"
         android:layout_width="211dp"
         android:layout_height="59dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="425dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         android:text="@string/profile_btn"
+        app:layout_constraintBottom_toTopOf="@+id/settings_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
 
     <Button
         android:id="@+id/friends_btn"
         android:layout_width="211dp"
         android:layout_height="59dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         android:text="@string/friends_btn"
+        app:layout_constraintBottom_toTopOf="@+id/profile_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
 
     <Button
         android:id="@+id/navigation_btn"
         android:layout_width="211dp"
         android:layout_height="59dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="275dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         android:text="@string/navigation_btn"
+        app:layout_constraintBottom_toTopOf="@+id/friends_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
 
     <Button
         android:id="@+id/rideShare_btn"
         android:layout_width="211dp"
         android:layout_height="59dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
         android:text="@string/rideShare_btn"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754" />
 
     <Button
         android:id="@+id/settings_btn"
         android:layout_width="211dp"
         android:layout_height="59dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="500dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/settings_btn"
+        app:layout_constraintBottom_toTopOf="@+id/logout_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.961" />
 
     <TextView
         android:id="@+id/welcome_message"

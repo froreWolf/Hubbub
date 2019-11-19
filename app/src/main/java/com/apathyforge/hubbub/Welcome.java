@@ -24,13 +24,10 @@ import java.util.Random;
 
 public class Welcome extends AppCompatActivity {
 
-    Button button;
+    Button rideShareButton, navigationButton, friendsButton,
+            profileButton, settingsButton,signOutButton;
     FirebaseAuth mAuth;
-    GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
-    //variables to hold user data
-    FirebaseUser user;
-    String userNameF, userNameL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +35,52 @@ public class Welcome extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
         mAuth = FirebaseAuth.getInstance();
-        button = findViewById(R.id.logout_btn);
-        button.setOnClickListener(new View.OnClickListener() {
+        //bind buttons to button variables
+        rideShareButton = findViewById(R.id.rideShare_btn);
+        navigationButton = findViewById(R.id.navigation_btn);
+        friendsButton = findViewById(R.id.friends_btn);
+        profileButton = findViewById(R.id.profile_btn);
+        settingsButton = findViewById(R.id.settings_btn);
+        signOutButton = findViewById(R.id.logout_btn);
+        //create onclick listeners for buttons
+        rideShareButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(Welcome.this, RideShare.class));
+            }
+        });
+        navigationButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(Welcome.this, Navigation.class));
+            }
+        });
+        friendsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(Welcome.this, Friends.class));
+            }
+        });
+        profileButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(Welcome.this, User_Profile.class));
+            }
+        });
+        settingsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(Welcome.this, SettingsActivity.class));
+            }
+        });
+        signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signOut();
             }
         });
+
+
 
         getUserDetails();
 
@@ -95,6 +131,8 @@ public class Welcome extends AppCompatActivity {
             signOutRevokeAccess();
         }
 */  }
+
+
 
     public String getWelcomeMessage(){
         Random rand = new Random();
