@@ -1,0 +1,61 @@
+todo
+-----------------------------------------------
+-write paper
+-finish appliation
+	-ride sharing
+	-maps
+	-friends
+	-profile
+	-settings
+	-.edu email authentication
+	-deletion of unwanted accounts/non .edu email accounts
+-prep for presentation
+	-plan what to say during presentation in what order
+	-plan demonstrations	
+	-create demonstration videos as backup (don't want to rely on live demos)
+	-practice audience questions
+-get second reader (perhaps Dr. Lifer?)
+
+Paper
+========================================================================================================
+-Abstract
+-introduction
+-purpose/uses of the application
+-why Hubbub (what makes it standout)
+-what all needed researched
+-technologies used
+	-android
+		-why I chose android over IOS
+	-firebase
+		-why I chose firebase
+		-what features I am using from it
+		-firebase integrations
+-specific features (Organized by the welcome screen buttons)
+	-log in process (firebase/google integration)
+	-ride sharing
+		-functionality
+		-why needed
+		-technologies used
+	-maps mode
+		-functionality
+		-why needed
+		-technologies used
+	-friends tab
+		-functionality
+		-why needed
+		-technologies used
+	-profile
+		-functionality
+		-why needed
+		-technologies used
+-application documentation (with pictures and step-by-step instructions explaining the individual features
+-code section
+	-just list the code I dunno
+-references
+	-websites used for reference are under capstone in firefox favorites
+	-main books used : mobile apps book and previous mobile apps book given by Ajwa
+
+
+Presentation
+=====================================================================================================
+-create demonstration videos of the application in use
