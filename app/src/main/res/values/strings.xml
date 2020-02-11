@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Hubbub</string>
+
+    <!-- welcome screen buttons -->
     <string name="rideShare_btn">Ride Sharing</string>
     <string name="navigation_btn">Navigation</string>
     <string name="friends_btn">Friends</string>
@@ -7,6 +9,7 @@
     <string name="settings_btn">Settings</string>
     <string name="logout_btn">Log Out</string>
     <string name="welcome_message">Welcome\ndisplayName</string>
+
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_settings">Settings</string>
 

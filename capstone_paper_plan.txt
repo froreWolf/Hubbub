@@ -59,3 +59,18 @@ Paper
 Presentation
 =====================================================================================================
 -create demonstration videos of the application in use
+
+
+
+
+paper
+=======================================
+-cover page
+	-title
+	-author
+	-purpose/date
+	-faculty advisor/second reader
+-acknowledgements
+-abstract
+-table of contents
+-introduction
