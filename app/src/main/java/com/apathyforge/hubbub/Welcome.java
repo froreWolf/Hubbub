@@ -3,7 +3,11 @@ package com.apathyforge.hubbub;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,12 +25,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
+import java.util.NavigableSet;
 import java.util.Random;
 
 public class Welcome extends AppCompatActivity {
 
     Button rideShareButton, navigationButton, friendsButton,
-            profileButton, settingsButton,signOutButton;
+            profileButton, settingsButton,signOutButton, permissionButton;
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
 
@@ -42,45 +48,68 @@ public class Welcome extends AppCompatActivity {
         profileButton = findViewById(R.id.profile_btn);
         settingsButton = findViewById(R.id.settings_btn);
         signOutButton = findViewById(R.id.logout_btn);
+        permissionButton = findViewById(R.id.permission_btn);
         //create onclick listeners for buttons
-        rideShareButton.setOnClickListener(new View.OnClickListener(){
+        rideShareButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v){
+            public void onClick(View v)
+            {
                 startActivity(new Intent(Welcome.this, RideShare.class));
             }
         });
-        navigationButton.setOnClickListener(new View.OnClickListener(){
+        navigationButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v){
+            public void onClick(View v)
+            {
                 startActivity(new Intent(Welcome.this, Navigation.class));
             }
         });
-        friendsButton.setOnClickListener(new View.OnClickListener(){
+        friendsButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v){
+            public void onClick(View v)
+            {
                 startActivity(new Intent(Welcome.this, Friends.class));
             }
         });
-        profileButton.setOnClickListener(new View.OnClickListener(){
+        profileButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v){
+            public void onClick(View v)
+            {
                 startActivity(new Intent(Welcome.this, User_Profile.class));
             }
         });
-        settingsButton.setOnClickListener(new View.OnClickListener(){
+        settingsButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v){
+            public void onClick(View v)
+            {
                 startActivity(new Intent(Welcome.this, SettingsActivity.class));
             }
         });
-        signOutButton.setOnClickListener(new View.OnClickListener() {
+        signOutButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 signOut();
             }
         });
+        permissionButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                getPermissions();
+            }
+        });
+        //leave the button to check permissions invisible until its needed
+        permissionButton.setVisibility(View.INVISIBLE);
 
-
+        getPermissions();
 
         getUserDetails();
 
@@ -162,4 +191,51 @@ public class Welcome extends AppCompatActivity {
         return "Welcome";
     }
 
+    private void getPermissions() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
+                .PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.
+                ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            //check permission for ACCESS_COARSE_LOCATION
+            if(shouldShowRequestPermissionRationale(Manifest.permission_group.LOCATION))
+            {
+                Toast.makeText(this, "Your location is " +
+                        "needed for this part of the application to " +
+                        "function as intended", Toast.LENGTH_LONG).show();
+                //get the permissions
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+            else
+            {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    rideShareButton.setVisibility(View.VISIBLE);
+                    navigationButton.setVisibility(View.VISIBLE);
+                    permissionButton.setVisibility(View.INVISIBLE);
+
+                }
+                else
+                {
+                    rideShareButton.setVisibility(View.INVISIBLE);
+                    navigationButton.setVisibility(View.INVISIBLE);
+                    permissionButton.setVisibility(View.VISIBLE);
+                }
+                return;
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.apathyforge.hubbub;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.location.LocationManagerCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -34,31 +35,30 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Navigation extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private boolean updateLocation;
     private LocationManager locationManager;
-    private Location location;
     private LocationIndex index;
+    private MarkerOptions userMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        //check if the the GPS_PROVIDER or NETWORK_PROVIDER services are enabled
+        boolean locationEnabled = isLocationEnabled();
+        if (!locationEnabled)
+        {
+            showLocationAlert();
+        }
+        //create Location manager to be able to get user locations
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //holds the LatLng data for map points
+        index = new LocationIndex();
+        //get the user's location and ensure that the correct permissions are taken
+        getLocation();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        //check if the the GPS_PROVIDER or NETWORK_PROVIDER services are enabled
-        boolean locationEnabled = isLocationEnabled();
-        if (!locationEnabled) {
-            showLocationAlert();
-        }
-        //holds the LatLng data for map points
-        index = new LocationIndex();
-        //sets location tracking off initially
-        updateLocation = false;
-        //create Location manager to be able to get user locations
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
     /**
      * Manipulates the map once available.
@@ -76,32 +76,18 @@ public class Navigation extends FragmentActivity implements OnMapReadyCallback {
         mMap.clear();
         //add all hub map markers as well as a marker for Ashland University
         mMap.addMarker(new MarkerOptions().position(index.getAU()).title("Ashland University"));
+        mMap.addMarker(new MarkerOptions().position(index.getMansfield()).title("Mansfield"));
+        mMap.addMarker(new MarkerOptions().position(index.getOntario()).title("Ontario"));
+        mMap.addMarker(new MarkerOptions().position(index.getWooster()).title("Wooster"));
+        mMap.addMarker(new MarkerOptions().position(index.getMifflin()).title("Mifflin"));
+        mMap.addMarker(new MarkerOptions().position(index.getLoudonVille()).title("Loudonville"));
 
-        //get the user's location to be used to position the camera
-        getLocation();
-        //fffLatLng userLoc = new LatLng(location.getLatitude(), location.getLongitude());
-        //set camera position and animate into it
-        CameraPosition initialPosition = CameraPosition.builder()
-                .target(index.getAU())
-                .zoom(10)
-                .bearing(0)
-                .tilt(45)
-                .build();
-
-        mMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(initialPosition)
-                , 5000, null);
-        //marker click listeners
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
-        {
-            @Override
-            public boolean onMarkerClick(Marker marker){
-                LatLng position = marker.getPosition();
-                //link to google maps application?
-                //possibly another activity that will handle navigation?
-                return false;
-            }
-        });
+        //add the user's location
+        userMarker = new MarkerOptions().position(
+                index.getUserLoc()).title("YOU ARE HERE!");
+        mMap.addMarker(userMarker);
+        //setup the camera
+        setCamera();
     }
 
 
@@ -128,7 +114,8 @@ public class Navigation extends FragmentActivity implements OnMapReadyCallback {
     }
 
 
-    private boolean isLocationEnabled() {
+    private boolean isLocationEnabled()
+    {
         Context context = getApplicationContext();
         LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         return lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
@@ -138,28 +125,55 @@ public class Navigation extends FragmentActivity implements OnMapReadyCallback {
     private void getLocation() {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
                 .PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.
-                ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    Activity#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
+                ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            //check permission for ACCESS_COARSE_LOCATION
+            if(shouldShowRequestPermissionRationale(Manifest.permission_group.LOCATION))
+            {
+                Toast.makeText(this, "Your location is " +
+                        "needed for this part of the application to " +
+                        "function as intended", Toast.LENGTH_LONG).show();
+                //get the permissions
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+            else
+            {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
         }
-        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        else
+        {
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            index.setUserLoc(new LatLng(location.getLatitude(),location.getLongitude()));
+        }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation();
+                } else {
+                    startActivity(new Intent(Navigation.this, Welcome.class));
+                }
+                return;
+            }
+        }
+    }
+
 
     private final LocationListener locationListenerNetwork = new LocationListener()
     {
         @Override
         public void onLocationChanged(Location location)
         {
-            if(updateLocation)
-            {
-
-            }
+            setCamera();
         }
 
         // remaining three methods remain unused for this particular application
@@ -172,4 +186,22 @@ public class Navigation extends FragmentActivity implements OnMapReadyCallback {
         @Override
         public void onProviderDisabled(String provider){}
     };
+
+    public void setCamera(){
+        //get the new location for the camera and marker
+        getLocation();
+        //move location map marker to new location
+        userMarker.position(index.getUserLoc());
+        //set the camera
+        CameraPosition initialPosition = CameraPosition.builder()
+                .target(index.getUserLoc())
+                .zoom(10)
+                .bearing(0)
+                .tilt(45)
+                .build();
+
+        mMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(initialPosition)
+                , 5000, null);
+    }
 }

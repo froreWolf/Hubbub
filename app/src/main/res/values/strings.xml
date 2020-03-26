@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Hubbub</string>
+    <string name="blank"></string>
 
     <!-- welcome screen buttons -->
     <string name="rideShare_btn">Ride Sharing</string>
@@ -8,20 +9,26 @@
     <string name="profile_btn">My Profile</string>
     <string name="settings_btn">Settings</string>
     <string name="logout_btn">Log Out</string>
+    <string name="permission_btn">Check Permissions</string>
     <string name="welcome_message">Welcome\ndisplayName</string>
 
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Location Names -->
+    <string name="ashland">Ashland University</string>
+    <string name="mansfield">Mansfield</string>
+    <string name="ontario">Ontario</string>
+    <string name="wooster">Wooster</string>
+    <string name="mifflin">Mifflin</string>
+    <string name="loudonville">Loudonville</string>
+
+    <!-- Ride Share Activity -->
+    <string name="instructions">Tap on the chat room you wish to enter.</string>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-
     <string name="action_settings">Settings</string>
     <string name="title_activity_navigation">Map</string>
 

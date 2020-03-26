@@ -1,9 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RideShare">
+
+    <TextView
+        android:id="@+id/instructions"
+        android:text="@string/instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/location1_btn"
+        android:text="@string/blank"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/instructions"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/location2_btn"
+        android:text="@string/blank"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/location1_btn"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/location3_btn"
+        android:text="@string/blank"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/location2_btn"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/location4_btn"
+        android:text="@string/blank"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/location3_btn"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/location5_btn"
+        android:text="@string/blank"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/location4_btn"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/location6_btn"
+        android:text="@string/blank"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/location5_btn"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

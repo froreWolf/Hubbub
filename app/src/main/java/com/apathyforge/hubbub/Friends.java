@@ -32,7 +32,7 @@ public class Friends extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean onCreateOPtionsMenu(Menu menu)
+    public boolean onCreateOptionsMenu(Menu menu)
     {
         return true;
     }

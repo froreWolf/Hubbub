@@ -59,4 +59,12 @@
         android:text="@string/logout_btn"
         android:layout_below="@id/settings_btn"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/permission_btn"
+        android:layout_width="211dp"
+        android:layout_height="59dp"
+        android:text="@string/permission_btn"
+        android:layout_below="@id/logout_btn"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

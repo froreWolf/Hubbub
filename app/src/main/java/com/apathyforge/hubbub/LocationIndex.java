@@ -5,41 +5,48 @@ import com.google.android.gms.maps.model.LatLng;
 public class LocationIndex
 {
     private LatLng AU;
-    private LatLng Hub1;
-    private LatLng Hub2;
-    private LatLng Hub3;
-    private LatLng Hub4;
+    private LatLng userLoc;
+    private LatLng Mansfield;
+    private LatLng Ontario;
+    private LatLng Wooster;
+    private LatLng Mifflin;
+    private LatLng LoudonVille;
 
     public LocationIndex()
     {
         //Ashland University
         AU = new LatLng(40.8614888818401, -82.3217368125916);
-        //Hub1 = new LatLng();
-        //Hub2 = new LatLng();
-        //Hub3 = new LatLng();
-        //Hub4 = new LatLng();
+        Mansfield = new LatLng(40.758416, -82.515276 );
+        Ontario = new LatLng(40.762495, -82.593522);
+        Wooster = new LatLng(40.809482, -81.935286);
+        Mifflin = new LatLng(40.780358, -82.376628);
     }
 
     public LatLng getAU()
     {
         return AU;
     }
+    public LatLng getMansfield()
+    {
+        return Mansfield;
+    }
+    public LatLng getOntario()
+    {
+        return Ontario;
+    }
+    public LatLng getWooster()
+    {
+        return Wooster;
+    }
+    public LatLng getMifflin(){return Mifflin;}
+    public LatLng getLoudonVille(){return LoudonVille;}
 
-    public LatLng getHub1()
-    {
-        return Hub1;
+    public void setUserLoc(LatLng newLoc){
+        userLoc = newLoc;
     }
-    public LatLng getHub2()
-    {
-        return Hub2;
-    }
-    public LatLng getHub3()
-    {
-        return Hub3;
-    }
-    public LatLng getHub4()
-    {
-        return Hub4;
+
+    public LatLng getUserLoc(){
+        return userLoc;
     }
 
 }

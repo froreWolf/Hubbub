@@ -1,8 +1,11 @@
 package com.apathyforge.hubbub;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +33,12 @@ public class User_Profile extends AppCompatActivity
 
         getUserInfo();
 
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         //get rid of this later please!!!!!
         updateUserInfo();
     }
@@ -47,6 +56,22 @@ public class User_Profile extends AppCompatActivity
         DatabaseReference myRef = database.getReference("message");
 
         myRef.setValue("Hello World.");
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        return true;
     }
 
 }
