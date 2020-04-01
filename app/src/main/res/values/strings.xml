@@ -16,12 +16,12 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Location Names -->
-    <string name="ashland">Ashland University</string>
-    <string name="mansfield">Mansfield</string>
-    <string name="ontario">Ontario</string>
-    <string name="wooster">Wooster</string>
-    <string name="mifflin">Mifflin</string>
-    <string name="loudonville">Loudonville</string>
+    <string name="location1">Ashland University</string>
+    <string name="location2">Mansfield</string>
+    <string name="location3">Ontario</string>
+    <string name="location4">Wooster</string>
+    <string name="location5">Mifflin</string>
+    <string name="location6">Loudonville</string>
 
     <!-- Ride Share Activity -->
     <string name="instructions">Tap on the chat room you wish to enter.</string>
@@ -33,9 +33,13 @@
     <string name="title_activity_navigation">Map</string>
 
     <!-- profile elements -->
-    <string name="profileUsername">TextView</string>
-    <string name="profileEmail">TextView</string>
-    <string name="todo">TODO</string>
+    <string name="profileUsername">user name</string>
+    <string name="profileEmail">user email</string>
+    <string name="userDesc">Tell the world who you are!</string>
+    <string name="updateProfile">Update Profile</string>
+
+    <!-- chat room strings -->
+    <string name="sendButton">Send</string>
 
 
 </resources>

@@ -1,36 +1,56 @@
 package com.apathyforge.hubbub;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class User_Profile extends AppCompatActivity
 {
 
+    protected DatabaseReference mUsersRef;
+    private DatabaseReference mCurUser;
+    private FirebaseUser user;
+    private EditText input;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__profile);
 
+        //link controls
         TextView username = findViewById(R.id.profileUserName);
         TextView email = findViewById(R.id.profileEmail);
-        ImageView pfp = findViewById(R.id.profilePicture);
+        input = findViewById(R.id.userDescEntry);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //get user information from account
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         username.setText("Name: " + user.getDisplayName());
         email.setText("Email: " + user.getEmail());
 
+        //set up database reference
+        DatabaseReference mRootRef = FirebaseDatabase.getInstance().
+                getReference();
+        mUsersRef = mRootRef.child("users");
+        mCurUser = mUsersRef.child(user.getUid());
         getUserInfo();
 
         ActionBar actionBar = getSupportActionBar();
@@ -38,33 +58,41 @@ public class User_Profile extends AppCompatActivity
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        //get rid of this later please!!!!!
-        updateUserInfo();
     }
 
 
 
     public void getUserInfo()
     {
-
+        mCurUser.child("aboutMe").addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                if(!(snapshot.getValue() == null))
+                {
+                    input.setText(snapshot.getValue().toString());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+            }
+        });
     }
 
-    public void updateUserInfo()
+    public void updateUserInfo(View view)
     {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello World.");
+        mCurUser.child("email").setValue(user.getEmail());
+        mCurUser.child("username").setValue(user.getDisplayName());
+        mCurUser.child("aboutMe").setValue(input.getText().toString());
     }
 
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        switch(item.getItemId())
-        {
-            case android.R.id.home:
-                finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

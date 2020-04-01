@@ -20,7 +20,7 @@
         android:layout_width="211dp"
         android:layout_height="59dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/instructions"
+        android:layout_below="@id/instructions"
         android:layout_marginTop="20dp"/>
 
     <Button
@@ -29,7 +29,7 @@
         android:layout_width="211dp"
         android:layout_height="59dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/location1_btn"
+        android:layout_below="@id/location1_btn"
         android:layout_marginTop="20dp"/>
 
     <Button
@@ -38,7 +38,7 @@
         android:layout_width="211dp"
         android:layout_height="59dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/location2_btn"
+        android:layout_below="@id/location2_btn"
         android:layout_marginTop="20dp"/>
 
     <Button
@@ -47,7 +47,7 @@
         android:layout_width="211dp"
         android:layout_height="59dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/location3_btn"
+        android:layout_below="@id/location3_btn"
         android:layout_marginTop="20dp"/>
 
     <Button
@@ -56,7 +56,7 @@
         android:layout_width="211dp"
         android:layout_height="59dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/location4_btn"
+        android:layout_below="@id/location4_btn"
         android:layout_marginTop="20dp"/>
 
     <Button
@@ -65,7 +65,7 @@
         android:layout_width="211dp"
         android:layout_height="59dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/location5_btn"
+        android:layout_below="@id/location5_btn"
         android:layout_marginTop="20dp"/>
 
 </RelativeLayout>
