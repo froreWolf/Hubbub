@@ -2,7 +2,6 @@ package com.apathyforge.hubbub;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -49,7 +48,6 @@ public class chatRoom extends AppCompatActivity
         mChatRef = FirebaseDatabase.getInstance().getReference();
         mChatRef = mChatRef.child("chatRooms");
 
-        //array adapter here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         messageList = new ArrayList<>();
 
         MessageListAdapter adapter = new MessageListAdapter(

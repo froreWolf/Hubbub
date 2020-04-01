@@ -9,23 +9,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 
 public class User_Profile extends AppCompatActivity
 {
 
-    protected DatabaseReference mUsersRef;
-    private DatabaseReference mCurUser;
-    private FirebaseUser user;
+    protected DatabaseReference mUsersList;
+    private FirebaseUser FBUser;
+    private User user;
+    private String key;
+    //controls
     private EditText input;
 
     @SuppressLint("SetTextI18n")
@@ -41,16 +45,16 @@ public class User_Profile extends AppCompatActivity
         input = findViewById(R.id.userDescEntry);
 
         //get user information from account
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        FBUser = FirebaseAuth.getInstance().getCurrentUser();
         assert user != null;
-        username.setText("Name: " + user.getDisplayName());
-        email.setText("Email: " + user.getEmail());
+        username.setText("Name: " + FBUser.getDisplayName());
+        email.setText("Email: " + FBUser.getEmail());
 
         //set up database reference
         DatabaseReference mRootRef = FirebaseDatabase.getInstance().
                 getReference();
-        mUsersRef = mRootRef.child("users");
-        mCurUser = mUsersRef.child(user.getUid());
+        mUsersList = mRootRef.child("users");
+        user = new User();
         getUserInfo();
 
         ActionBar actionBar = getSupportActionBar();
@@ -60,32 +64,72 @@ public class User_Profile extends AppCompatActivity
         }
     }
 
-
-
     public void getUserInfo()
     {
-        mCurUser.child("aboutMe").addValueEventListener(new ValueEventListener()
-        {
+        Query users = mUsersList.orderByChild("userID")
+                .equalTo(FBUser.getUid());
+
+
+        users.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot,
+                                     @Nullable String s)
             {
-                if(!(snapshot.getValue() == null))
+                if(key != null)
                 {
-                    input.setText(snapshot.getValue().toString());
+                    mUsersList.child(key).removeValue();
+                    key = null;
+                }
+
+                if (dataSnapshot.exists()) {
+                    user = dataSnapshot.getValue(User.class);
+                    input.setText(user.getUserIntro());
+                    key = dataSnapshot.getKey();
                 }
             }
             @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot,
+                                       @Nullable String s)
+            {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot)
+            {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot,
+                                     @Nullable String s)
+            {
+
+            }
+
+            @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
+
             }
         });
     }
 
-    public void updateUserInfo(View view)
+
+
+    public void onClick(View view)
     {
-        mCurUser.child("email").setValue(user.getEmail());
-        mCurUser.child("username").setValue(user.getDisplayName());
-        mCurUser.child("aboutMe").setValue(input.getText().toString());
+        updateUserInfo();
+    }
+
+    public void updateUserInfo()
+    {
+        user.setUserName(FBUser.getDisplayName());
+        user.setUserEmail(FBUser.getEmail());
+        user.setUserID(FBUser.getUid());
+        user.setUserIntro(input.getText().toString());
+
+        mUsersList.push().setValue(user);
     }
 
     public boolean onOptionsItemSelected(MenuItem item)
@@ -101,5 +145,4 @@ public class User_Profile extends AppCompatActivity
     {
         return true;
     }
-
 }

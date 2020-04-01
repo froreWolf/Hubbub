@@ -47,6 +47,6 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/userDescEntry"
         android:text="@string/updateProfile"
-        android:onClick="updateUserInfo"/>
+        android:onClick="onClick"/>
 
 </RelativeLayout>
