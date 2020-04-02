@@ -1,31 +1,25 @@
 package com.apathyforge.hubbub;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
-
-import java.util.NavigableSet;
 import java.util.Random;
 
 public class Welcome extends AppCompatActivity {
@@ -55,7 +49,8 @@ public class Welcome extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(Welcome.this, RideShare.class));
+                startActivity(new Intent(Welcome.this,
+                        RideShare.class));
             }
         });
         navigationButton.setOnClickListener(new View.OnClickListener()
@@ -63,7 +58,8 @@ public class Welcome extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(Welcome.this, Navigation.class));
+                startActivity(new Intent(Welcome.this,
+                        Navigation.class));
             }
         });
         friendsButton.setOnClickListener(new View.OnClickListener()
@@ -71,7 +67,8 @@ public class Welcome extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(Welcome.this, Friends.class));
+                startActivity(new Intent(Welcome.this,
+                        Friends.class));
             }
         });
         profileButton.setOnClickListener(new View.OnClickListener()
@@ -79,7 +76,8 @@ public class Welcome extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(Welcome.this, User_Profile.class));
+                startActivity(new Intent(Welcome.this,
+                        User_Profile.class));
             }
         });
         settingsButton.setOnClickListener(new View.OnClickListener()
@@ -87,7 +85,8 @@ public class Welcome extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(Welcome.this, SettingsActivity.class));
+                startActivity(new Intent(Welcome.this,
+                        SettingsActivity.class));
             }
         });
         signOutButton.setOnClickListener(new View.OnClickListener()
@@ -114,7 +113,8 @@ public class Welcome extends AppCompatActivity {
         getUserDetails();
 
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
+                GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
@@ -131,7 +131,8 @@ public class Welcome extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(Welcome.this, MainActivity.class));
+                        startActivity(new Intent(Welcome.this,
+                                MainActivity.class));
                     }
                 });
     }
@@ -144,7 +145,8 @@ public class Welcome extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(Welcome.this, MainActivity.class));
+                        startActivity(new Intent(Welcome.this,
+                                MainActivity.class));
                     }
                 });
     }
@@ -152,7 +154,8 @@ public class Welcome extends AppCompatActivity {
     public void getUserDetails(){
         TextView welcomeMessage = findViewById(R.id.welcome_message);
         FirebaseUser user = mAuth.getCurrentUser();
-        welcomeMessage.setText(getWelcomeMessage() + "\n" + user.getDisplayName() + "!");
+        welcomeMessage.setText(getWelcomeMessage() + "\n" +
+                user.getDisplayName() + "!");
         //log the user out and revoke access for their account if the user
         //logs in with an email address that is not a .edu address
 /*      String userEmail = user.getEmail();
@@ -192,36 +195,43 @@ public class Welcome extends AppCompatActivity {
     }
 
     private void getPermissions() {
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager
                 .PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.
                 ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             //check permission for ACCESS_COARSE_LOCATION
-            if(shouldShowRequestPermissionRationale(Manifest.permission_group.LOCATION))
+            if(shouldShowRequestPermissionRationale(Manifest.permission_group
+                    .LOCATION))
             {
                 Toast.makeText(this, "Your location is " +
                         "needed for this part of the application to " +
                         "function as intended", Toast.LENGTH_LONG).show();
                 //get the permissions
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                requestPermissions(new String[]{Manifest.permission
+                        .ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
             else
             {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                requestPermissions(new String[]{Manifest.permission
+                        .ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
             }
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
+                                           String[] permissions, int[]
+                                                       grantResults) {
         switch (requestCode) {
             case 1: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                        && grantResults[0] == PackageManager
+                        .PERMISSION_GRANTED)
                 {
                     rideShareButton.setVisibility(View.VISIBLE);
                     navigationButton.setVisibility(View.VISIBLE);
